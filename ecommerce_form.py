@@ -1,4 +1,3 @@
-
 class OnlinePurchase:
     def __init__(self):
         self.valid_coupons = {"DISCOUNT10": 0.15, "DISCOUNT30": 0.30}
@@ -28,8 +27,6 @@ class OnlinePurchase:
     def process_purchase(self, cart, coupon, address):
         print("Processng purcase...")
 
-
-
         for item, quantity in cart.items():
             if item not in self.items:
                 return f" Error: '{item}' is not a valid item."
@@ -46,10 +43,10 @@ class OnlinePurchase:
         cart_summary = "\n".join([f"{item}: {quantity} x ${self.items[item]}" for item, quantity in cart.items()])
 
         return (f"Purchase completed.\n"
-                f"Itms:\n{cart_summary}\n"
+                f"Items:\n{cart_summary}\n"
                 f"Coupon: {coupon or 'None'}\n"
                 f"Shipping Addresss: {address}\n"
                 f"Total to payy: ${total_with_discount:.2f}")
 
 
-if __name__ == "__main__":
+#if __name__ == "__main__":

@@ -1,0 +1,12 @@
+INFO     root:test_lab2.py:5 TEST CASE 1: RF1 (NEGATIVE)
+INFO     root:test_lab2.py:20 The purchase result is:  Error: Quantity for 'Laptop' must be an integer greater than 0.
+INFO     root:test_lab2.py:25 TEST CASE 1: RF3 (NEGATIVE)
+INFO     root:test_lab2.py:40 The purchase result is:  Error: The entered coupon code is not valid.
+INFO     root:test_lab2.py:45 TEST CASE 1: RF9 (POSITIVE)
+INFO     root:test_lab2.py:60 The purchase result is: Purchase completed.
+Items:
+Laptop: 1 x $1000
+Mouse: 2 x $50
+Coupon: DISCOUNT10
+Shipping Addresss: Avenida Montevideo
+Total to payy: $935.00
