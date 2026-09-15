@@ -1,10 +1,28 @@
 import ecommerce_form
 import log_conf
+import pytest
 
-def test_RF1_item_invalid(): # Checamos que el numero de items sea valido.
+@pytest.fixture
+def system():
+    return ecommerce_form.OnlinePurchase()
+
+@pytest.mark.unit
+@pytest.mark.parametrize('quantity, expected', [(3, True), (-5, False), (0.67, False)])
+def test_validate_quantity(system, quantity, expected):
+    result = system.validate_quantity(quantity)
+    assert result == expected
+
+@pytest.mark.unit
+@pytest.mark.parametrize('coupon, expected', [('DISCOUNT10', True), ('DISCOUNT20', True), ('DISCOUNT30', False)])
+def test_validate_coupon(system, coupon, expected):
+    result = system.validate_coupon(coupon)
+    assert result == expected
+
+@pytest.mark.system
+def test_RF1_item_invalid(system): # Checamos que el numero de items sea valido.
     log_conf.logging.info('TEST CASE 1: RF1 (NEGATIVE)')
     
-    system = ecommerce_form.OnlinePurchase()
+    #system = ecommerce_form.OnlinePurchase()
     
     cart = {
         'Laptop': 0,
@@ -21,6 +39,7 @@ def test_RF1_item_invalid(): # Checamos que el numero de items sea valido.
     
     assert 'greater than 0' in result
 
+@pytest.mark.system
 def test_RF3_invalid_coupon(): # Checamos el cupon.
     log_conf.logging.info('TEST CASE 1: RF3 (NEGATIVE)')
 
@@ -41,6 +60,7 @@ def test_RF3_invalid_coupon(): # Checamos el cupon.
         
     assert 'Discount code in not valid' in result
 
+@pytest.mark.system
 def test_RF9_check_discuont(): # Checamos el cupon.
     log_conf.logging.info('TEST CASE 1: RF9 (POSITIVE)')
 
@@ -64,5 +84,5 @@ def test_RF9_check_discuont(): # Checamos el cupon.
 if __name__ == "__main__":
     log_conf.logging.info('START')
     test_RF1_item_invalid()
-    test_RF3_invalid_coupon() # Invalisdazo
+    test_RF3_invalid_coupon() # Invalidazo
     test_RF9_check_discuont() # Invalidazo
